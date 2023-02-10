@@ -1,22 +1,61 @@
-const fs = require('fs').promises;
-const { parse } = require('csv-parse/sync');
+const fs = require('fs');
+const { parse } = require('csv-parse');
 const { stringify } = require('csv-stringify');
 
-const tasksAddress = __dirname+"/database/tasks.csv";
+class List {
+  constructor(address) {
+    this.address = address;
+    this.getData();
+  }
 
-const parseCSV = async (location) => {
-  const fileContent = await fs.readFile(location);
-  const records = parse(fileContent, {columns: true});
-  return records;
+  getData() {
+    this.data = [];
+    fs.createReadStream(this.address)
+      .pipe(parse({columns: true}))
+      .on("data", (row) => this.data.push(row))
+      .on("end", () => console.log("finish!", this.data))
+      .on("error", (err) => console.error(err));
+  }
+  
+  writeData() {
+    stringify(this.data, {header: true}, function (err, output) {
+      fs.writeFile(this.address, output);
+    });
+  }
+
+  removeData(id) {
+    this.data[id] = null;
+  }
 }
 
-const updateCSV = (parsedData, csvAddress) => {
-  stringify(parsedData, {header: true}, function (err, output) {
-    fs.writeFile(csvAddress, output);
-  });
+class ClientList extends List {
+  constructor(address) {
+    super(address);
+  }
+
+  addClient(name, balance) {
+    this.data.push({
+      id: id || this.data.length, 
+      name, 
+      balance: balance || 0,
+    });
+  }
 }
 
-(async function main() {
-  let parsedTasks = await parseCSV(tasksAddress);
-  console.log(parsedTasks);
-})();
+class TaskList extends List {
+  constructor(address) {
+    super(address);
+  }
+
+  addTask(id, client_id, matter, description) {
+    this.data.push({
+      id: id || this.data.length,
+      client_id: client_id,
+      matter: matter,
+      description: description,
+    });
+  }
+}
+
+const clientList = new ClientList(__dirname+"/database/clients.csv");
+const taskList = new TaskList(__dirname+"/database/tasks.csv");
