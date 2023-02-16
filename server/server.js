@@ -33,12 +33,15 @@ class ClientList extends List {
     super(address);
   }
 
-  addClient(name, balance) {
-    this.data.push({
-      id: id || this.data.length, 
-      name, 
-      balance: balance || 0,
-    });
+  add(input) {
+    this.data.push(Object.assign(
+      {
+        id: this.data.length,
+        name: null,
+        balance: null,
+      },
+      input,
+    ));
   }
 }
 
@@ -47,13 +50,16 @@ class TaskList extends List {
     super(address);
   }
 
-  addTask(id, client_id, matter, description) {
-    this.data.push({
-      id: id || this.data.length,
-      client_id: client_id,
-      matter: matter,
-      description: description,
-    });
+  add(input) {
+    this.data.push(Object.assign(
+      {
+        id: this.data.length,
+        cliet_id: null,
+        matter: null,
+        description: null,
+      }, 
+      input,
+    ));
   }
 }
 
