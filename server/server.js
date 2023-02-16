@@ -1,69 +1,14 @@
 const fs = require('fs');
+const { parse, stringify } = require('./list').csv;
+const { clientList, taskList } = require('./list').lists;
 const express = require('express');
 const app = express();
-const { parse } = require('csv-parse');
-const { stringify } = require('csv-stringify');
 
-class List {
-  constructor(address) {
-    this.address = address;
-    this.getData();
-  }
+const PORT = 8080;
 
-  getData() {
-    this.data = [];
-    fs.createReadStream(this.address)
-      .pipe(parse({columns: true}))
-      .on("data", (row) => this.data.push(row))
-      .on("end", () => console.log("finish!", this.data))
-      .on("error", (err) => console.error(err));
-  }
-  
-  writeData() {
-    stringify(this.data, {header: true}, function (err, output) {
-      fs.writeFile(this.address, output);
-    });
-  }
+console.log(clientList);
+console.log(taskList);
 
-  removeData(id) {
-    this.data[id] = null;
-  }
-}
-
-class ClientList extends List {
-  constructor(address) {
-    super(address);
-  }
-
-  add(input) {
-    this.data.push(Object.assign(
-      {
-        id: this.data.length,
-        name: null,
-        balance: null,
-      },
-      input,
-    ));
-  }
-}
-
-class TaskList extends List {
-  constructor(address) {
-    super(address);
-  }
-
-  add(input) {
-    this.data.push(Object.assign(
-      {
-        id: this.data.length,
-        cliet_id: null,
-        matter: null,
-        description: null,
-      }, 
-      input,
-    ));
-  }
-}
-
-const clientList = new ClientList(__dirname+"/database/clients.csv");
-const taskList = new TaskList(__dirname+"/database/tasks.csv");
+app.listen(PORT, '127.0.0.1', function() {
+  console.log('Server listening on port ' + PORT);
+})
