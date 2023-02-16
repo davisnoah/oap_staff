@@ -1,5 +1,3 @@
-const fs = require('fs');
-const { parse, stringify } = require('./list').csv;
 const { clientList, taskList } = require('./list').lists;
 const express = require('express');
 const app = express();
