@@ -1,1 +1,5 @@
 id,client_id,matter,description
+0,0,Hunger,Cook him food
+1,0,Hunger,Burn the food
+2,0,Hunger,Force feed him
+3,0,Hunger,Rip him open
