@@ -29,7 +29,10 @@ const showTasks = async (container) => {
     container.textContent = 'Tasks not found :(';
   } else {
     // show tasks
-    container.textContent = JSON.stringify(tasks);
+    tasks.forEach(task => {
+      const taskElement = createTaskElement(task);
+      tasksContainer.appendChild(taskElement);
+    })
   }
 }
 
@@ -37,8 +40,26 @@ const hideTasks = async (container) => {
   container.textContent = '';
 }
 
+const createTaskElement = (taskData) => {
+  const task = document.createElement('div');
+  const taskBody = document.createElement('div');
+  const taskShadow = document.createElement('div');
+  const taskDescription = document.createElement('div');
+  task.classList.add('task');
+  taskBody.classList.add('task__body');
+  taskBody.classList.add('flex--column');
+  taskDescription.classList.add('task__description')
+  taskShadow.classList.add('task__shadow');
+  task.appendChild(taskShadow);
+  task.appendChild(taskBody);
+  taskBody.appendChild(taskDescription);
+  taskDescription.textContent = JSON.stringify(taskData);
+  
+  return task;
+}
+
 /* 
-  STARTING FUNCTION CALLS
+  INITIAL FUNCTION CALLS
 */
 
 showTasks(tasksContainer);
