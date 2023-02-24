@@ -9,6 +9,10 @@ app.use(cors());
 
 app.get('/tasks', (req, res) => {
   res.send(taskList.data);
+});
+
+app.get('/clients', (req, res) => {
+  res.send(clientList.data);
 })
 
 app.listen(PORT, function() {

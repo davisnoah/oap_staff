@@ -1,5 +1,7 @@
+import { getClientsFromServer } from './clients.js'
+
 // get tasks array from server
-const getTasksFromServer = async () => {
+export const getTasksFromServer = async () => {
   let response;
   try {
     response = await fetch('http://localhost:8080/tasks', {
@@ -13,7 +15,7 @@ const getTasksFromServer = async () => {
 }
 
 // turn tasks in dom elements and add them to the dom
-const addTasksToDom = (tasks) => {
+export const addTasksToDom = (tasksContainer, tasks) => {
   tasks.forEach(task => {
     const taskElement = createTaskDomElem(task);
     tasksContainer.appendChild(taskElement);
@@ -21,7 +23,7 @@ const addTasksToDom = (tasks) => {
 }
 
 // turn tasks into dom elements
-const createTaskDomElem = (taskData) => {
+export const createTaskDomElem = (taskData) => {
   // create elements
   const task = document.createElement('div');
   const taskBody = document.createElement('div');
@@ -41,7 +43,7 @@ const createTaskDomElem = (taskData) => {
   taskLocationIcon.classList.add('fa-solid', 'fa-location-dot');
   taskShadow.classList.add('task__shadow');
 
-  // add elements to dom
+  // nest elements and their contents
   task.appendChild(taskShadow);
   task.appendChild(taskBody);
   taskBody.appendChild(taskDescription);
@@ -56,20 +58,23 @@ const createTaskDomElem = (taskData) => {
 }
 
 // remove tasks from dom
-const removeTasksFromDom = async (tasksContainer) => {
+export const removeTasksFromDom = async (tasksContainer) => {
   tasksContainer.textContent = '';
 }
 
 // get tasks from server and add them to dom
-const showTasks = async (container) => {
-  // gets tasks from server
+export const showTasks = async (container) => {
+  // get tasks from server
   const tasks = await getTasksFromServer();
+  
+  // get clients from server
+  const clients = await getClientsFromServer();
 
   if (tasks === null) {
     // show error message
     container.textContent = 'Tasks not found :(';
   } else {
     // show tasks
-    addTasksToDom(tasks);
+    addTasksToDom(container, tasks);
   }
 }
