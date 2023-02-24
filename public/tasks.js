@@ -1,13 +1,5 @@
-/* 
-  DOM ELEMENTS
-*/
-
-const tasksContainer = document.querySelector('.tasks-container');
-
-/*
-  FUNCTIONS
-*/
-const getTasks = async () => {
+// get tasks array from server
+const getTasksFromServer = async () => {
   let response;
   try {
     response = await fetch('http://localhost:8080/tasks', {
@@ -20,46 +12,64 @@ const getTasks = async () => {
   return await response.json();
 }
 
+// turn tasks in dom elements and add them to the dom
+const addTasksToDom = (tasks) => {
+  tasks.forEach(task => {
+    const taskElement = createTaskDomElem(task);
+    tasksContainer.appendChild(taskElement);
+  });
+}
+
+// turn tasks into dom elements
+const createTaskDomElem = (taskData) => {
+  // create elements
+  const task = document.createElement('div');
+  const taskBody = document.createElement('div');
+  const taskShadow = document.createElement('div');
+  const taskDescription = document.createElement('p');
+  const taskCheckBox = document.createElement('div');
+  const taskLocation = document.createElement('p');
+  const taskLocationIcon = document.createElement('i');
+  const taskLocationText = document.createElement('span');
+
+  // add classes to elements
+  task.classList.add('task');
+  taskBody.classList.add('task__body', 'flex--column');
+  taskDescription.classList.add('task__description');
+  taskCheckBox.classList.add('task__checkbox');
+  taskLocation.classList.add('task__location');
+  taskLocationIcon.classList.add('fa-solid', 'fa-location-dot');
+  taskShadow.classList.add('task__shadow');
+
+  // add elements to dom
+  task.appendChild(taskShadow);
+  task.appendChild(taskBody);
+  taskBody.appendChild(taskDescription);
+  taskBody.appendChild(taskCheckBox);
+  taskBody.appendChild(taskLocation);
+  taskDescription.textContent = taskData.description; 
+  taskLocation.appendChild(taskLocationIcon);
+  taskLocation.appendChild(taskLocationText);
+  taskLocationText.textContent = " " + taskData.location;
+  
+  return task;
+}
+
+// remove tasks from dom
+const removeTasksFromDom = async (tasksContainer) => {
+  tasksContainer.textContent = '';
+}
+
+// get tasks from server and add them to dom
 const showTasks = async (container) => {
-  // gets tasks
-  const tasks = await getTasks();
+  // gets tasks from server
+  const tasks = await getTasksFromServer();
 
   if (tasks === null) {
     // show error message
     container.textContent = 'Tasks not found :(';
   } else {
     // show tasks
-    tasks.forEach(task => {
-      const taskElement = createTaskElement(task);
-      tasksContainer.appendChild(taskElement);
-    })
+    addTasksToDom(tasks);
   }
 }
-
-const hideTasks = async (container) => {
-  container.textContent = '';
-}
-
-const createTaskElement = (taskData) => {
-  const task = document.createElement('div');
-  const taskBody = document.createElement('div');
-  const taskShadow = document.createElement('div');
-  const taskDescription = document.createElement('div');
-  task.classList.add('task');
-  taskBody.classList.add('task__body');
-  taskBody.classList.add('flex--column');
-  taskDescription.classList.add('task__description')
-  taskShadow.classList.add('task__shadow');
-  task.appendChild(taskShadow);
-  task.appendChild(taskBody);
-  taskBody.appendChild(taskDescription);
-  taskDescription.textContent = JSON.stringify(taskData);
-  
-  return task;
-}
-
-/* 
-  INITIAL FUNCTION CALLS
-*/
-
-showTasks(tasksContainer);

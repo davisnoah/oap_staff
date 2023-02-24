@@ -12,23 +12,19 @@
   --clr-neutral-100: #000;
   --clr-neutral-900: #fff;
 
-  --clr-1: #1A5B7A;
-  --clr-2: #007F95;
-  --clr-3: #00A39D;
-  --clr-4: #43C593;
-  --clr-5: #9CE27F;
-  --clr-6: #F9F871;
-  --clr-7: #D77FA9;
-  --clr-8: #B478AD;
-  --clr-9: #8D73AB;
-  --clr-10: #EB9929;
-  --clr-11: #ECFCFF;
+  --clr-task-body: #1A5B7A;
+  --clr-task-checkbox: #ABE2FF;
+  --clr-task-checkbox-border: #659CBE;
+  --clr-task-txt: #F1F1E6;
+  --clr-task-location: #7BB2D5;
+
+  --clr-bg: #ECFCFF;
 }
 
 /* PRESETS */
 
 body {
-  background-color: var(--clr-11);
+  background-color: var(--clr-bg);
   color: var(--clr-neutral-100);
 }
 
@@ -60,21 +56,27 @@ body {
   justify-content: space-around;
 }
 
+.tasks-container > h2 {
+  font-size: 2.5em;
+}
+
 .task {
   --offset-from-shadow: 1em;
   --width: 30em;
-  --height: 30em;
+  --height: 10em;
   position: relative;
   width: var(--width);
   height: var(--height);
 }
 
 .task__body {
-  padding: 1.5em;
+  --padding: 1.5em;
+  position: relative;
+  padding: var(--padding);
   width: var(--width);
   height: var(--height);
-  background-color: var(--clr-1);
-  color: var(--clr-neutral-900);
+  background-color: var(--clr-task-body);
+  color: var(--clr-task-txt);
   transition-duration: 100ms;
 }
 
@@ -83,6 +85,7 @@ body {
   transform: 
     translateX(var(--offset-from-shadow)) 
     translateY(var(--offset-from-shadow));
+  cursor: pointer;
 }
 
 .task__shadow {
@@ -98,12 +101,41 @@ body {
   z-index: -1;
 }
 
-.task__location {
-
+.task__description {
+  font-size: 1.5em;
 }
 
-.task__description {
-  
+.task__checkbox {
+  --border-width: .2em;
+  --width: 2em;
+  --fill-width: calc( var(--width) - (var(--border-width) * 4) );
+  position: absolute;
+  right: var(--padding);
+  top: var(--padding);
+  border: var(--border-width) dashed var(--clr-task-checkbox-border);
+  box-shadow: 0 0 0 var(--border-width) var(--clr-task-body);
+  width: var(--width);
+  height: var(--width);
+}
+
+.task__checkbox::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: var(--fill-width);
+  height: var(--fill-width);
+  background-color: var(--clr-task-checkbox);
+}
+
+.task__location {
+  position: absolute;
+  bottom: var(--padding);
+  left: var(--padding);
+  font-size: .75em;
+  text-transform: uppercase;
+  color: var(--clr-task-location);
 }
 
 .task__matter {
