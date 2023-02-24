@@ -1,5 +1,5 @@
-import { getClientsFromServer } from './clients.js';
-import { getTasksFromServer } from './tasks.js';
+import { getClientsFromServer } from './accessServer.js';
+import { getTasksFromServer } from './accessServer.js';
 
 // turn tasks into dom elements
 export const createTaskElem = (taskData, clientData) => {

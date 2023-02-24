@@ -1,4 +1,4 @@
-import { showTasks } from './DOM.js';
+import { showTasks } from './accessDOM.js';
 
 // show tasks
 const tasksContainer = document.querySelector('.tasks-container');
