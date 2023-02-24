@@ -1,5 +1,4 @@
-import { getClientsFromServer } from './accessServer.js';
-import { getTasksFromServer } from './accessServer.js';
+import { getClientsFromServer, getTasksFromServer } from './accessServer.js';
 
 // turn tasks into dom elements
 export const createTaskElem = (taskData, clientData) => {
@@ -8,6 +7,7 @@ export const createTaskElem = (taskData, clientData) => {
   const taskBody = document.createElement('div');
   const taskShadow = document.createElement('div');
   const taskClient = document.createElement('p');
+  const taskMatter = document.createElement('span');
   const taskDescription = document.createElement('p');
   const taskCheckBox = document.createElement('div');
   const taskLocation = document.createElement('p');
@@ -18,6 +18,7 @@ export const createTaskElem = (taskData, clientData) => {
   task.classList.add('task');
   taskBody.classList.add('task__body');
   taskClient.classList.add('task__client');
+  taskMatter.classList.add('task__matter');
   taskDescription.classList.add('task__description');
   taskCheckBox.classList.add('task__checkbox');
   taskLocation.classList.add('task__location');
@@ -32,6 +33,8 @@ export const createTaskElem = (taskData, clientData) => {
   taskBody.appendChild(taskCheckBox);
   taskBody.appendChild(taskLocation);
   taskClient.textContent = clientData[taskData.client_id].name;
+  taskClient.appendChild(taskMatter);
+  taskMatter.textContent = " - " + taskData.matter;
   taskDescription.textContent = taskData.description; 
   taskLocation.appendChild(taskLocationIcon);
   taskLocation.appendChild(taskLocationText);
