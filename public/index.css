@@ -20,6 +20,12 @@
   --clr-task-location: #7BB2D5;
 
   --clr-bg: #ECFCFF;
+
+  --ff-task-heading: monospace;
+  --ff-task-description: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  --ff-task-client: monospace;
+  --ff-task-location: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  
 }
 
 /* PRESETS */
@@ -59,6 +65,8 @@ body {
 
 .tasks-container > h2 {
   font-size: 2.5em;
+  font-family: var(--ff-task-heading);
+  text-transform: uppercase;
 }
 
 .task {
@@ -107,12 +115,13 @@ body {
   margin-bottom: 1em;
   color: var(--clr-task-client);
   font-weight: normal;
-  font-family: monospace;
+  font-family: var(--ff-task-client);
   text-transform: uppercase;
 }
 
 .task__description {
   font-size: 1.5em;
+  font-family: var(--ff-task-description);
 }
 
 .task__checkbox {
@@ -144,6 +153,7 @@ body {
   bottom: var(--padding);
   left: var(--padding);
   font-size: .75em;
+  font-family: var(--ff-task-location);
   text-transform: uppercase;
   color: var(--clr-task-location);
 }
