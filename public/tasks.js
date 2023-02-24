@@ -15,19 +15,20 @@ export const getTasksFromServer = async () => {
 }
 
 // turn tasks in dom elements and add them to the dom
-export const addTasksToDom = (tasksContainer, tasks) => {
+export const addTasksToDom = (tasksContainer, tasks, clients) => {
   tasks.forEach(task => {
-    const taskElement = createTaskDomElem(task);
+    const taskElement = createTaskDomElem(task, clients);
     tasksContainer.appendChild(taskElement);
   });
 }
 
 // turn tasks into dom elements
-export const createTaskDomElem = (taskData) => {
+export const createTaskDomElem = (taskData, clientData) => {
   // create elements
   const task = document.createElement('div');
   const taskBody = document.createElement('div');
   const taskShadow = document.createElement('div');
+  const taskClient = document.createElement('p');
   const taskDescription = document.createElement('p');
   const taskCheckBox = document.createElement('div');
   const taskLocation = document.createElement('p');
@@ -36,7 +37,8 @@ export const createTaskDomElem = (taskData) => {
 
   // add classes to elements
   task.classList.add('task');
-  taskBody.classList.add('task__body', 'flex--column');
+  taskBody.classList.add('task__body');
+  taskClient.classList.add('task__client');
   taskDescription.classList.add('task__description');
   taskCheckBox.classList.add('task__checkbox');
   taskLocation.classList.add('task__location');
@@ -46,9 +48,11 @@ export const createTaskDomElem = (taskData) => {
   // nest elements and their contents
   task.appendChild(taskShadow);
   task.appendChild(taskBody);
+  taskBody.appendChild(taskClient);
   taskBody.appendChild(taskDescription);
   taskBody.appendChild(taskCheckBox);
   taskBody.appendChild(taskLocation);
+  taskClient.textContent = clientData[taskData.client_id].name;
   taskDescription.textContent = taskData.description; 
   taskLocation.appendChild(taskLocationIcon);
   taskLocation.appendChild(taskLocationText);
@@ -75,6 +79,6 @@ export const showTasks = async (container) => {
     container.textContent = 'Tasks not found :(';
   } else {
     // show tasks
-    addTasksToDom(container, tasks);
+    addTasksToDom(container, tasks, clients);
   }
 }

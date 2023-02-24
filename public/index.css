@@ -16,6 +16,7 @@
   --clr-task-checkbox: #ABE2FF;
   --clr-task-checkbox-border: #659CBE;
   --clr-task-txt: #F1F1E6;
+  --clr-task-client: #F9F871;
   --clr-task-location: #7BB2D5;
 
   --clr-bg: #ECFCFF;
@@ -101,6 +102,15 @@ body {
   z-index: -1;
 }
 
+.task__client {
+  font-size: 1em;
+  margin-bottom: 1em;
+  color: var(--clr-task-client);
+  font-weight: bold;
+  font-family: monospace;
+  text-transform: uppercase;
+}
+
 .task__description {
   font-size: 1.5em;
 }
@@ -140,10 +150,6 @@ body {
 
 .task__matter {
 
-}
-
-.task__client {
-  
 }
 
 /* RESPONSIVE */
