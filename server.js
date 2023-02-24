@@ -8,12 +8,14 @@ const ip = '127.0.0.1';
 app.use(express.static('public'));
 app.use(cors());
 
-app.get('/tasks', (req, res) => {
-  res.send(taskList.data);
+app.get('/tasks', async (req, res) => {
+  const taskListData = await taskList.getData();
+  res.send(taskListData);
 });
 
-app.get('/clients', (req, res) => {
-  res.send(clientList.data);
+app.get('/clients', async (req, res) => {
+  const clientListData = await clientList.getData();
+  res.send(clientListData);
 })
 
 app.listen(PORT, ip, function() {

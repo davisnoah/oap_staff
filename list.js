@@ -1,5 +1,5 @@
-const fs = require('fs');
-const { parse } = require('csv-parse');
+const fs = require('fs').promises;
+const { parse } = require('csv-parse/sync');
 const { stringify } = require('csv-stringify');
 
 class List {
@@ -8,23 +8,36 @@ class List {
     this.getData();
   }
 
-  getData() {
-    this.data = [];
-    fs.createReadStream(this.address)
-      .pipe(parse({columns: true}))
-      .on("data", (row) => this.data.push(row))
-      .on("end", () => console.log("finish!"))
-      .on("error", (err) => console.error(err));
+  async getData() {
+    const fileContent = await fs.readFile(this.address);
+    this.data = parse(fileContent, { columns: true });
+    return this.data;
   }
   
-  writeData() {
-    stringify(this.data, {header: true}, function (err, output) {
+  updateDatabase() {
+    stringify(this.data, { header: true }, function (err, output) {
       fs.writeFile(this.address, output);
     });
   }
 
-  removeData(id) {
+  remove(id) {
     this.data[id] = null;
+  }
+
+  add(input) {
+    const record = {};
+    for (let prop in this.default) {
+      record[prop] = this.default || input[prop];
+    }
+    this.data.push(record);
+    this.updateDatabase(data);
+  }
+
+  get nextAvailablePosition() {
+    let availablePosition = this.data.indexOf(null);
+    if (availablePosition === -1) {
+      availablePosition = this.data.length;
+    }
   }
 }
 
@@ -33,15 +46,12 @@ class ClientList extends List {
     super(address);
   }
 
-  add(input) {
-    this.data.push(Object.assign(
-      {
-        id: this.data.length,
-        name: null,
-        balance: null,
-      },
-      input,
-    ));
+  get default() {
+    return {
+      id: this.nextAvailablePosition,
+      name: null,
+      balance: null,
+    }
   }
 }
 
@@ -49,17 +59,15 @@ class TaskList extends List {
   constructor(address) {
     super(address);
   }
-
-  add(input) {
-    this.data.push(Object.assign(
-      {
-        id: this.data.length,
-        cliet_id: null,
-        matter: null,
-        description: null,
-      }, 
-      input,
-    ));
+  
+  get default() {
+    return {
+      id: this.nextAvailablePosition,
+      client_id: null,
+      matter: null,
+      description: null,
+      location: null,
+    }
   }
 }
 
@@ -67,4 +75,3 @@ exports.lists = {
   clientList: new ClientList(__dirname+"/database/clients.csv"), 
   taskList: new TaskList(__dirname+"/database/tasks.csv"),
 };
-exports.csv = { parse, stringify };
