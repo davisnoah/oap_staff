@@ -2,7 +2,7 @@
 export const getClientsFromServer = async () => {
   let response;
   try {
-    response = await fetch('http://localhost:8080/clients', {
+    response = await fetch('http://127.0.0.1:8080/clients', {
       method: 'get',
     });
   } catch(error) {

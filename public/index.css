@@ -64,7 +64,7 @@ body {
 .task {
   --offset-from-shadow: 1em;
   --width: 30em;
-  --height: 10em;
+  --height: 12em;
   position: relative;
   width: var(--width);
   height: var(--height);
@@ -103,10 +103,10 @@ body {
 }
 
 .task__client {
-  font-size: 1em;
+  font-size: 1.2em;
   margin-bottom: 1em;
   color: var(--clr-task-client);
-  font-weight: bold;
+  font-weight: normal;
   font-family: monospace;
   text-transform: uppercase;
 }
