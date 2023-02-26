@@ -20,7 +20,7 @@
   --clr-task-matter: #7BB2D5;
   --clr-task-location: #7BB2D5;
 
-  --clr-tasks-container-scrollbar: #0004;
+  --clr-tasks-scrollbar: #0004;
 
   --clr-bg: #F9F871;
 
@@ -65,7 +65,7 @@ body {
 
 /* task container */
 
-.tasks-container {
+.tasks {
   --gap: 2em;
   --task-width: 30em;
   --task-height: 10em;
@@ -78,13 +78,13 @@ body {
   z-index: 3;
 }
 
-.tasks-container ._heading {
+.tasks ._heading {
   font-size: 2.5em;
   font-family: var(--ff-task-heading);
   text-transform: uppercase;
 }
 
-.tasks-container ._heading__details {
+.tasks ._heading__details {
   font-size: 0.5em;
   color: #444;
 }
@@ -195,12 +195,12 @@ body {
 
 /* tasks container scrollbar */
 
-.tasks-container::-webkit-scrollbar {
+.tasks::-webkit-scrollbar {
   width: .75em;
 }
 
-.tasks-container::-webkit-scrollbar-thumb {
-  background-color: var(--clr-tasks-container-scrollbar);
+.tasks::-webkit-scrollbar-thumb {
+  background-color: var(--clr-tasks-scrollbar);
   border-radius: .5em;
 }
 
