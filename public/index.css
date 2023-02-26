@@ -20,6 +20,8 @@
   --clr-task-matter: #7BB2D5;
   --clr-task-location: #7BB2D5;
 
+  --clr-tasks-container-scrollbar: #0004;
+
   --clr-bg: #F9F871;
 
   --ff-task-heading: monospace;
@@ -72,6 +74,7 @@ body {
   height: 100%;
   padding: 2em;
   overflow-y: scroll;
+  user-select: none;
   z-index: 3;
 }
 
@@ -188,6 +191,17 @@ body {
 
 .task__location__text {
   margin-left: .25em;
+}
+
+/* tasks container scrollbar */
+
+.tasks-container::-webkit-scrollbar {
+  width: .75em;
+}
+
+.tasks-container::-webkit-scrollbar-thumb {
+  background-color: var(--clr-tasks-container-scrollbar);
+  border-radius: .5em;
 }
 
 /* controls */
