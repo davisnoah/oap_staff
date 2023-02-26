@@ -13,10 +13,24 @@
   <main class="flex--row">
     <section class="tasks flex--column">
       <h2 class="_heading">Tasks<span class="_heading__details"> (All)</span></h2>
+      <!-- FETCH TASKS FROM SERVER -->
     </section>
-    <section class="controls">
-      <div class="toolbar flex--column"></div>
-      <div class=""></div>
+    <section class="controls flex--row">
+      <div class="toolbar flex--column">
+        <div class="toolbar__btn tasks-btn flex--row clickable" title="Tasks">
+          <i class="fa-solid fa-table-list"></i>
+        </div>
+        <div class="toolbar__btn clients-btn flex--row clickable" title="Clients">
+          <i class="fa-solid fa-user"></i>
+        </div>
+        <div class="toolbar__btn sort-btn flex--row clickable" title="Sort">
+          <i class="fa-solid fa-filter"></i>
+        </div>
+        <div class="toolbar__btn settings-btn flex--row clickable" title="Settings">
+          <i class="fa-solid fa-ellipsis"></i>
+        </div>
+      </div>
+      <div class="controls__content"></div>
     </section>
   </main>
 </body>

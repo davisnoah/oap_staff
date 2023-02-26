@@ -16,7 +16,7 @@ export const createTaskElem = (taskData, clientData) => {
 
   // add classes to elements
   task.classList.add('task');
-  taskBody.classList.add('task__body');
+  taskBody.classList.add('task__body', 'clickable');
   taskClient.classList.add('task__client');
   taskMatter.classList.add('task__matter');
   taskDescription.classList.add('task__description');
@@ -58,13 +58,20 @@ export const removeTasksFromDom = async (tasksContainer) => {
 }
 
 // get tasks from server and add them to dom
-export const showTasks = async (container) => {
+export const showTasks = async () => {
+  const tasksContainer = document.querySelector('.tasks');
   const tasks = await getTasksFromServer();
   const clients = await getClientsFromServer();
 
   if (tasks === null) {
     container.textContent = 'Tasks not found :(';
   } else {
-    addTasksToDom(container, tasks, clients);
+    addTasksToDom(tasksContainer, tasks, clients);
   }
 }
+
+// show the different different menus
+export const showClientsMenu = () => console.log('Clients button clicked');
+export const showTasksMenu = () => console.log('Tasks button clicked');
+export const showSortMenu = () => console.log('Sort button clicked');
+export const showSettingsMenu = () => console.log('Settings button clicked');
