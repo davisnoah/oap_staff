@@ -1,4 +1,4 @@
-const { clientList, taskList } = require('./list').lists;
+const { clientList, taskList } = require('./accessDatabase').lists;
 const express = require('express');
 const app = express();
 const cors = require('cors');
