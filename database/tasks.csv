@@ -2,4 +2,6 @@ id,client_id,matter,description,location
 0,0,Hunger,Cook him food,Home
 1,0,Hunger,Burn the food,Home
 2,0,Hunger,Force feed him,Home
-3,0,Hunger,Rip him open,Home
+4,1,Sickness,Buy him medicine,Spanish Town
+5,4,Dirty,Shower him,Home
+6,4,Dirty,Cloth him,Home

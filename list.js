@@ -27,7 +27,7 @@ class List {
   add(input) {
     const record = {};
     for (let prop in this.default) {
-      record[prop] = this.default || input[prop];
+      record[prop] = input[prop] || this.default;
     }
     this.data.push(record);
     this.updateDatabase(data);

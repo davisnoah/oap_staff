@@ -23,6 +23,7 @@ export const createTaskElem = (taskData, clientData) => {
   taskCheckBox.classList.add('task__checkbox');
   taskLocation.classList.add('task__location');
   taskLocationIcon.classList.add('fa-solid', 'fa-location-dot');
+  taskLocationText.classList.add('task__location__text');
   taskShadow.classList.add('task__shadow');
 
   // nest elements and their contents
@@ -32,13 +33,13 @@ export const createTaskElem = (taskData, clientData) => {
   taskBody.appendChild(taskDescription);
   taskBody.appendChild(taskCheckBox);
   taskBody.appendChild(taskLocation);
-  taskClient.textContent = clientData[taskData.client_id].name;
+  taskClient.textContent = (clientData) ? clientData[taskData.client_id].name : null;
   taskClient.appendChild(taskMatter);
   taskMatter.textContent = " - " + taskData.matter;
   taskDescription.textContent = taskData.description; 
   taskLocation.appendChild(taskLocationIcon);
   taskLocation.appendChild(taskLocationText);
-  taskLocationText.textContent = " " + taskData.location;
+  taskLocationText.textContent = taskData.location;
   
   return task;
 }
@@ -58,17 +59,12 @@ export const removeTasksFromDom = async (tasksContainer) => {
 
 // get tasks from server and add them to dom
 export const showTasks = async (container) => {
-  // get tasks from server
   const tasks = await getTasksFromServer();
-  
-  // get clients from server
   const clients = await getClientsFromServer();
 
   if (tasks === null) {
-    // show error message
     container.textContent = 'Tasks not found :(';
   } else {
-    // show tasks
     addTasksToDom(container, tasks, clients);
   }
 }
