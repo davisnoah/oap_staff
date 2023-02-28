@@ -12,25 +12,29 @@
 <body>
   <main class="flex--row">
     <section class="tasks flex--column">
-      <h2 class="_heading">Tasks<span class="_heading__details"> (All)</span></h2>
+      <h2 class="tasks__heading">Tasks<span class="tasks__heading__details"> (All)</span></h2>
       <!-- FETCH TASKS FROM SERVER -->
     </section>
     <section class="controls flex--row">
       <div class="toolbar flex--column">
-        <div class="toolbar__btn tasks-btn flex--row clickable" title="Tasks">
+        <div data-active="false" class="toolbar__btn tasks-btn flex--row clickable" title="Tasks">
           <i class="fa-solid fa-table-list"></i>
         </div>
-        <div class="toolbar__btn clients-btn flex--row clickable" title="Clients">
+        <div data-active="false" class="toolbar__btn clients-btn flex--row clickable" title="Clients">
           <i class="fa-solid fa-user"></i>
         </div>
-        <div class="toolbar__btn sort-btn flex--row clickable" title="Sort">
+        <div data-active="false" class="toolbar__btn filter-btn flex--row clickable" title="Sort">
           <i class="fa-solid fa-filter"></i>
         </div>
-        <div class="toolbar__btn settings-btn flex--row clickable" title="Settings">
+        <div data-active="false" class="toolbar__btn settings-btn flex--row clickable" title="Settings">
           <i class="fa-solid fa-ellipsis"></i>
         </div>
       </div>
-      <div class="controls__content"></div>
+      <div class="controls__content">
+        <div class="tasks-menu flex--column">
+          
+        </div>
+      </div>
     </section>
   </main>
 </body>

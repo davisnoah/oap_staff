@@ -2,21 +2,23 @@ import {
   showTasks, 
   showTasksMenu, 
   showClientsMenu, 
-  showSortMenu, 
+  showFilterMenu, 
   showSettingsMenu 
 } from './accessDOM.js';
 
-// show tasks
-showTasks();
+document.addEventListener('DOMContentLoaded', (event) => {
+  // show tasks
+  showTasks();
 
-// get reference to toolbar buttons
-const showTasksMenuBtn = document.querySelector('.tasks-btn');
-const showSettingsMenuBtn = document.querySelector('.settings-btn');
-const showClientsMenuBtn = document.querySelector('.clients-btn');
-const showSortMenuBtn = document.querySelector('.sort-btn');
+  // get reference to toolbar buttons
+  const tasksMenuBtn = document.querySelector('.tasks-btn');
+  const settingsMenuBtn = document.querySelector('.settings-btn');
+  const clientsMenuBtn = document.querySelector('.clients-btn');
+  const filterMenuBtn = document.querySelector('.filter-btn');
 
-// add functions that toolbar buttons will run when clicked
-showTasksMenuBtn.onclick = showTasksMenu;
-showSettingsMenuBtn.onclick = showSettingsMenu;
-showClientsMenuBtn.onclick = showClientsMenu;
-showSortMenuBtn.onclick = showSortMenu;
+  // add functions that toolbar buttons will run when clicked
+  tasksMenuBtn.onclick = showTasksMenu;
+  settingsMenuBtn.onclick = showSettingsMenu;
+  clientsMenuBtn.onclick = showClientsMenu;
+  filterMenuBtn.onclick = showFilterMenu;
+});

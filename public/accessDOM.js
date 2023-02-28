@@ -1,5 +1,9 @@
 import { getClientsFromServer, getTasksFromServer } from './accessServer.js';
 
+/* ====================
+         TASKS
+   ==================== */
+
 // turn tasks into dom elements
 export const createTaskElem = (taskData, clientData) => {
   // create elements
@@ -57,21 +61,78 @@ export const removeTasksFromDom = async (tasksContainer) => {
   tasksContainer.textContent = '';
 }
 
+// add relevant errors to task list in dom
+const addErrorsToTaskList = (container, { tasks, clients }) => {
+  if (tasks === null) {
+    const tasksError = document.createElement('p');
+    tasksError.classList.add('tasks__error');
+    tasksError.textContent = 'Tasks not found.';
+    container.appendChild(tasksError);
+  }
+
+  if (clients === null) {
+    const clientsError = document.createElement('p');
+    clientsError.classList.add('tasks__error');
+    clientsError.textContent = 'Clients not found.';
+    container.appendChild(clientsError);
+  }
+}
+
 // get tasks from server and add them to dom
 export const showTasks = async () => {
   const tasksContainer = document.querySelector('.tasks');
   const tasks = await getTasksFromServer();
   const clients = await getClientsFromServer();
 
-  if (tasks === null) {
-    container.textContent = 'Tasks not found :(';
+  if (!tasks || !clients) {
+    addErrorsToTaskList(tasksContainer, { tasks, clients });
   } else {
     addTasksToDom(tasksContainer, tasks, clients);
   }
 }
 
+/* ====================
+         TOOLBAR
+   ==================== */
+
+const isToolbarBtnActive = (btn) => btn.dataset.active === 'true';
+const markToolbarBtnActive = (btn) => btn.dataset.active = 'true';
+const markToolbarBtnInactive = (btn) => btn.dataset.active = 'false';
+
+const getClickedToolbarBtn = (target) => {
+  if (target.classList.contains('toolbar__btn')) return target;
+  else if (target.tagName.toLowerCase() === 'body') return target;
+  else return getClickedToolbarBtn(target.parentNode);
+}
+
+// mark toolbar btn as active and deactivate the rest
+const handleActiveToolbarBtn = (event) => {
+  const clickedBtn = getClickedToolbarBtn(event.target);
+  const toolbarBtns = [...document.querySelector('.toolbar').children];
+  toolbarBtns.forEach(btn => {
+    if (clickedBtn === btn) {
+      if (!isToolbarBtnActive(btn)) {
+        markToolbarBtnActive(btn);
+      }
+    } else if (isToolbarBtnActive(btn)) {
+      markToolbarBtnInactive(btn);
+    }
+  });
+}
+
 // show the different different menus
-export const showClientsMenu = () => console.log('Clients button clicked');
-export const showTasksMenu = () => console.log('Tasks button clicked');
-export const showSortMenu = () => console.log('Sort button clicked');
-export const showSettingsMenu = () => console.log('Settings button clicked');
+export const showClientsMenu = (e) => {
+  handleActiveToolbarBtn(e);
+}
+
+export const showTasksMenu = (e) => {
+  handleActiveToolbarBtn(e);
+}
+
+export const showFilterMenu = (e) => {
+  handleActiveToolbarBtn(e);
+}
+
+export const showSettingsMenu = (e) => {
+  handleActiveToolbarBtn(e);
+}

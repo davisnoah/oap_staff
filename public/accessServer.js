@@ -1,5 +1,5 @@
 // get tasks array from server
-export const getDataFromServer = async (end) => {
+const getDataFromServer = async (end) => {
   let response;
   try {
     response = await fetch('http://127.0.0.1:8080' + end, {

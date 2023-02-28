@@ -83,16 +83,22 @@ main {
   z-index: 3;
 }
 
-.tasks ._heading {
+.tasks__heading {
   font-size: 2.5em;
   font-family: var(--ff-task-heading);
   margin-bottom: calc(var(--tasks-padding) - var(--gap) * 1.5);
   text-transform: uppercase;
 }
 
-.tasks ._heading__details {
+.tasks__heading__details {
   font-size: 0.5em;
   color: var(--clr-neutral-400);
+}
+
+.tasks__error {
+  font-size: 1.5em;
+  color: var(--clr-neutral-900);
+  background-color: var(--clr-neutral-100);
 }
 
 /* task */
@@ -226,21 +232,21 @@ main {
   position: relative;
   height: 100%;
   width: var(--toolbar-width);
-  background-color: #1A5B7A07;
   justify-content: center;
   align-items: center;
 }
+
+/* toolbar buttons */
 
 .toolbar__btn {
   --width: calc(var(--toolbar-width) * .75);
   position: relative;
   width: var(--width);
   aspect-ratio: 1;
-  border-radius: 50%;
   justify-content: center;
   align-items: center;
-  opacity: 0.7;
   transition-duration: 100ms;
+  z-index: 3;
 }
 
 .toolbar__btn::before {
@@ -251,10 +257,14 @@ main {
   transform: translate(-50%, -50%);
   width: 0em;
   aspect-ratio: 1;
-  background-color: #ABE2FF55;
+  background-color: #ABE2FF77;
   border-radius: 50%;
   z-index: 1;
   transition-duration: 100ms;
+}
+
+.toolbar__btn[data-active="false"] {
+  opacity: 0.75;
 }
 
 .toolbar__btn:hover {
@@ -265,10 +275,26 @@ main {
   width: 100%;
 }
 
+.toolbar__btn[data-active="true"] {
+  opacity: 1;
+}
+
 .toolbar__btn > i {
   font-size: calc(var(--toolbar-width) * 0.4);
-  color: var(--clr-task-body);
   z-index: 2;
+  transition-duration: 50ms;
+}
+
+.toolbar__btn[data-active="false"] > i {
+  color: var(--clr-task-body);
+}
+
+.toolbar__btn[data-active="true"] > i {
+  color: var(--clr-neutral-100);
+}
+
+.toolbar__btn[data-active="false"]:active > i {
+  transform: translateY(.1em);
 }
 
 .toolbar .fa-filter {
