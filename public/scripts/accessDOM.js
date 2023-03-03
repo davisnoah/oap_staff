@@ -49,7 +49,7 @@ export const createTaskElem = (taskData, clientData) => {
 }
 
 // turn tasks in dom elements and add them to the dom
-export const addTasksToDom = (tasksContainer, tasks, clients) => {
+export const addTasksToDom = (tasksContainer, { tasks, clients} ) => {
   tasks.forEach(task => {
     const taskElement = createTaskElem(task, clients);
     tasksContainer.appendChild(taskElement);
@@ -87,7 +87,7 @@ export const showTasks = async () => {
   if (!tasks || !clients) {
     addErrorsToTaskList(tasksContainer, { tasks, clients });
   } else {
-    addTasksToDom(tasksContainer, tasks, clients);
+    addTasksToDom(tasksContainer, { tasks, clients });
   }
 }
 
@@ -123,6 +123,7 @@ const handleActiveToolbarBtn = (event) => {
 // show the different different menus
 export const showClientsMenu = (e) => {
   handleActiveToolbarBtn(e);
+  const menuContainer = document.querySelector('')
 }
 
 export const showTasksMenu = (e) => {

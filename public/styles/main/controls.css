@@ -1,0 +1,131 @@
+/* CONTROLS */
+
+.controls {
+  background-color: var(--clr-neutral-900);
+  color: #1B3D2F;
+  height: 100%;
+  align-self: center;
+  flex: 1;
+}
+
+/* TOOLBAR */
+
+.toolbar {
+  --gap: 1em;
+  --toolbar-width: 4em;
+  position: relative;
+  height: 100%;
+  width: var(--toolbar-width);
+  justify-content: center;
+  align-items: center;
+}
+
+/* toolbar buttons */
+
+.toolbar__btn {
+  --width: calc(var(--toolbar-width) * .75);
+  position: relative;
+  width: var(--width);
+  aspect-ratio: 1;
+  justify-content: center;
+  align-items: center;
+  transition-duration: 100ms;
+  z-index: 3;
+}
+
+.toolbar__btn::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 0em;
+  aspect-ratio: 1;
+  background-color: #ABE2FF77;
+  border-radius: 50%;
+  z-index: 1;
+  transition-duration: 100ms;
+}
+
+.toolbar__btn[data-active="false"] {
+  opacity: 0.75;
+}
+
+.toolbar__btn:hover {
+  opacity: 1;
+}
+
+.toolbar__btn:hover::before {
+  width: 100%;
+}
+
+.toolbar__btn[data-active="true"] {
+  opacity: 1;
+}
+
+/* toolbar button icons */
+
+.toolbar__btn > i {
+  font-size: calc(var(--toolbar-width) * 0.4);
+  z-index: 2;
+  transition-duration: 50ms;
+}
+
+.toolbar__btn[data-active="false"] > i {
+  color: var(--clr-task-body);
+}
+
+.toolbar__btn[data-active="true"] > i {
+  color: var(--clr-neutral-100);
+}
+
+.toolbar__btn[data-active="false"]:active > i {
+  transform: translateY(.1em);
+}
+
+.toolbar .fa-filter {
+  margin-top: .2em;
+}
+
+.settings-btn {
+  --padding: calc((var(--toolbar-width) - var(--width))/2);
+  position: absolute;
+  left: 50%;
+  bottom: var(--padding);
+  transform: translateX(-50%);
+}
+
+/* MENUS */
+
+/* tasks menu */
+
+.menus {
+  width: 100%;
+  height: 100%;
+}
+
+.tasks-menu {
+  --gap: 2em;
+  width: 100%;
+  height: 100%;
+  padding: 2em;
+}
+
+.tasks-menu__btn {
+  width: 90%;
+  height: 4em;
+  border-radius: .5em;
+  background-color: #1A5B7A;
+  color: #fff;
+  justify-content: center;
+  align-items: center;
+  transition-duration: 100ms;
+}
+
+.tasks-menu__btn:hover {
+  opacity: .75;
+}
+
+.tasks-menu__btn:active {
+  opacity: .5;
+}

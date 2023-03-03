@@ -5,8 +5,13 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>OAP Staff</title>
-  <link rel="stylesheet" href="index.css">
-  <script defer type="module" src="index.js"></script>
+  <link rel="stylesheet" href="styles/resets.css">
+  <link rel="stylesheet" href="styles/variables.css">
+  <link rel="stylesheet" href="styles/utility.css">
+  <link rel="stylesheet" href="styles/main/main.css">
+  <link rel="stylesheet" href="styles/main/tasks.css">
+  <link rel="stylesheet" href="styles/main/controls.css">
+  <script type="module" src="scripts/index.js"></script>
   <script src="https://kit.fontawesome.com/d115db5e03.js" crossorigin="anonymous"></script>
 </head>
 <body>
@@ -30,9 +35,14 @@
           <i class="fa-solid fa-ellipsis"></i>
         </div>
       </div>
-      <div class="controls__content">
+      <div class="menus">
         <div class="tasks-menu flex--column">
-          
+          <div class="tasks-menu__btn tasks-menu__add-task flex--row clickable click-effect--descend">
+            <p>Add Task</p>
+          </div>
+          <div class="tasks-menu__btn tasks-menu__remove-task flex--row clickable click-effect--descend">
+            <p>Remove Task</p>
+          </div>
         </div>
       </div>
     </section>

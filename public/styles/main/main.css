@@ -1,0 +1,13 @@
+body {
+  background-color: var(--clr-bg);
+  color: var(--clr-neutral-100);
+  width: 100vw;
+  min-height: 100vh;
+}
+
+/* MAIN */
+
+main {
+  width: 100vw;
+  height: 100vh;
+}

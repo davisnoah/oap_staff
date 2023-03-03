@@ -1,0 +1,25 @@
+/* VARIABLES */
+
+:root {
+  --clr-neutral-100: #000;
+  --clr-neutral-400: #444;
+  --clr-neutral-900: #fff;
+
+  --clr-task-body: #1A5B7A;
+  --clr-task-checkbox: #7BB2D5;
+  --clr-task-checkbox-border: #7BB2D5;
+  --clr-task-txt: #F1F1E6;
+  --clr-task-client: #F9F871;
+  --clr-task-matter: #7BB2D5;
+  --clr-task-location: #7BB2D5;
+
+  --clr-tasks-scrollbar: #0004;
+
+  --clr-bg: #F9F871;
+
+  --ff-task-heading: monospace;
+  --ff-task-description: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  --ff-task-client: monospace;
+  --ff-task-location: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  
+}

@@ -16,9 +16,10 @@ document.addEventListener('DOMContentLoaded', (event) => {
   const clientsMenuBtn = document.querySelector('.clients-btn');
   const filterMenuBtn = document.querySelector('.filter-btn');
 
-  // add functions that toolbar buttons will run when clicked
+  // add functions that toolbar buttons will call when clicked
   tasksMenuBtn.onclick = showTasksMenu;
   settingsMenuBtn.onclick = showSettingsMenu;
   clientsMenuBtn.onclick = showClientsMenu;
   filterMenuBtn.onclick = showFilterMenu;
+
 });
