@@ -30,14 +30,14 @@ export const createTaskElem = (taskData, clientData) => {
   taskLocationText.classList.add('task__location__text');
   taskShadow.classList.add('task__shadow');
 
-  // nest elements and their contents
+  // nest elements and add their contents
   task.appendChild(taskShadow);
   task.appendChild(taskBody);
   taskBody.appendChild(taskClient);
   taskBody.appendChild(taskDescription);
   taskBody.appendChild(taskCheckBox);
   taskBody.appendChild(taskLocation);
-  taskClient.textContent = (clientData) ? clientData[taskData.client_id].name : null;
+  taskClient.textContent = (clientData) ? clientData[taskData.client_id].name : 'null';
   taskClient.appendChild(taskMatter);
   taskMatter.textContent = " - " + taskData.matter;
   taskDescription.textContent = taskData.description; 
@@ -92,7 +92,7 @@ export const showTasks = async () => {
 }
 
 /* ====================
-         TOOLBAR
+      HANDLE TOOLBAR
    ==================== */
 
 const isToolbarBtnActive = (btn) => btn.dataset.active === 'true';
@@ -106,34 +106,41 @@ const getClickedToolbarBtn = (target) => {
 }
 
 // mark toolbar btn as active and deactivate the rest
-const handleActiveToolbarBtn = (event) => {
-  const clickedBtn = getClickedToolbarBtn(event.target);
+const handleActiveToolbarBtn = (clickedBtn) => {
   const toolbarBtns = [...document.querySelector('.toolbar').children];
   toolbarBtns.forEach(btn => {
     if (clickedBtn === btn) {
-      if (!isToolbarBtnActive(btn)) {
-        markToolbarBtnActive(btn);
-      }
+      markToolbarBtnActive(btn);
     } else if (isToolbarBtnActive(btn)) {
       markToolbarBtnInactive(btn);
     }
   });
 }
 
-// show the different different menus
-export const showClientsMenu = (e) => {
-  handleActiveToolbarBtn(e);
-  const menuContainer = document.querySelector('')
+/* ====================
+      HANDLE MENUS
+   ==================== */
+
+const isMenuActive = (menu) => menu.dataset.active === 'true';
+const markMenuActive = (menu) => menu.dataset.active = 'true';
+const markMenuInactive = (menu) => menu.dataset.active = 'false';
+
+const showMenu = (activatedMenu, menus) => {
+  menus.forEach(menu => {
+    if (menu === activatedMenu) {
+      markMenuActive(menu);
+    } else if (isMenuActive(menu)) {
+      markMenuInactive(menu);
+    }
+  })
 }
 
-export const showTasksMenu = (e) => {
-  handleActiveToolbarBtn(e);
-}
-
-export const showFilterMenu = (e) => {
-  handleActiveToolbarBtn(e);
-}
-
-export const showSettingsMenu = (e) => {
-  handleActiveToolbarBtn(e);
+// apply styles to clicked button and show correct menu
+export const handleToolbarBtnClick = (e) => {
+  const clickedBtn = getClickedToolbarBtn(e.target);
+  handleActiveToolbarBtn(clickedBtn);
+  const linkedMenuClass = clickedBtn.dataset.linkedMenuClass;
+  const linkedMenu = document.querySelector(linkedMenuClass);
+  const menus = [...document.querySelectorAll('.menu')];
+  showMenu(linkedMenu, menus);
 }
